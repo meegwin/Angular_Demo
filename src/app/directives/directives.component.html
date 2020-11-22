@@ -1,0 +1,197 @@
+<!-- NgIf: ẩn hiện tag/component -->
+<h1 *ngIf="isActive">Hello Cybersoft</h1>
+<button (click)="isActive = !isActive">Toggle</button>
+
+<!-- Chưa đăng nhập: isLogin = false -->
+<!-- Cách 1 -->
+<!-- <div *ngIf="!isLogin">
+  <p>Login</p>
+  <button
+    (click)="isLogin = true"
+  >
+    Đăng nhập
+  </button>
+</div> -->
+
+<!-- Đã đăng nhập: isLogin = true -->
+<div *ngIf="isLogin; else loginTemplate">
+  <p>Hello</p>
+  <button (click)="isLogin = false">Đăng xuất</button>
+</div>
+
+<!-- ng-template: mặc định không được render ra giao diện, mình cần phải gọi tới thì nó mới render ra -->
+<ng-template #loginTemplate>
+  <p>Login</p>
+  <button (click)="isLogin = true">Đăng Nhập</button>
+</ng-template>
+
+<!-- ngSwitch: vế bên phải nhận vào là 1 cái chuỗi, [ngSwitch]: vế bên phải nhận vào là 1 biến  -->
+<!-- *ngSwitchCase: vế bên phải nhận vào luôn luôn là 1 biến -->
+<!-- => điểm khác biện là dấu * trước tên directive -->
+<div [ngSwitch]="color">
+  <p *ngSwitchCase="'red'">Red</p>
+  <p *ngSwitchCase="'blue'">Blue</p>
+  <p *ngSwitchCase="'green'">Green</p>
+  <p *ngSwitchDefault>Default</p>
+</div>
+
+<select [value]="color" (change)="color = $event.target.value">
+  <option value="">Default</option>
+  <option value="red">Red</option>
+  <option value="blue">Blue</option>
+  <option value="green">Green</option>
+</select>
+
+<p *ngFor="let sv of dssv; let idx = index">
+  {{ idx + 1 }} - {{ sv.hoTen }} - {{ sv.lop }}
+</p>
+
+<!-- Không thể có 2 structural directive trên cùng 1 tag -->
+<div class="d-flex">
+  <!-- ng-container tương đương Fragment bên react, tag này sẽ không được render ra giao diện -->
+  <ng-container *ngIf="dssv">
+    <p *ngFor="let sv of dssv; index as idx">
+      {{ idx + 1 }} - {{ sv.hoTen }} - {{ sv.lop }}
+    </p>
+  </ng-container>
+</div>
+
+<!-- ng-container kết hợp ng-template -->
+<!-- Tái sử dụng 1 layout trong component -->
+
+<!-- Tạo ra layout để tái sử dụng -->
+<ng-template #templateAlert>
+  <div class="alert alert-danger">
+    <strong>Alert</strong>
+  </div>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="templateAlert"></ng-container>
+<ng-container *ngTemplateOutlet="templateAlert"></ng-container>
+<ng-container *ngTemplateOutlet="templateAlert"></ng-container>
+<ng-container *ngTemplateOutlet="templateAlert"></ng-container>
+
+<!-- ng-content -->
+<app-button>
+  Hello
+</app-button>
+
+<app-button>
+  Cybersoft
+</app-button>
+
+<p class="header"></p>
+
+<app-card>
+  <p slot="header">Header</p>
+  <p slot="body">Body</p>
+  <p slot="footer">Footer</p>
+</app-card>
+
+<div class="container">
+  <div class="row">
+    <div
+      *ngFor="let sv of dssv" class="col-sm-4"
+    >
+      <app-card>
+        <p slot="header">{{sv.lop}}</p>
+        <p slot="body">{{sv.hoTen}}</p>
+        <button slot="footer">
+          Chi tiết
+        </button>
+      </app-card>
+    </div>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+
+<!--
+  [class]={
+    'tên-class': điều-kiện
+  }
+  => nếu điều kiện là true tên class sẽ được add vào tag
+-->
+<p
+  class="text-center"
+  [class]="{
+    'text-primary': isActive,
+    'text-secondary': !isActive,
+    'bg-dark': isActive
+  }"
+>
+  Cybersoft
+</p>
+
+<!--
+  [style]="{
+    'thuộc-tính-css': giá trị của biến
+  }"
+-->
+
+<p
+  style="text-align: center"
+  [style]="{
+    'background-color': color
+  }"
+>
+  ngStyle
+</p>
+
+<div
+  style="background-repeat: no-repeat; height: 200px;"
+  [style]="{
+    'background-image': 'url(' + imageUrl + ')'
+  }"
+>
+
+</div>
+
+
+<div [innerHTML]="template">
+</div>
+
+
+<div appHighlight>
+  Highlight
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
