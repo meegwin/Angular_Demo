@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="text-center">
+    Shopping
+  </h1>
+
+  <app-product-list (onAddToCart)="handleAddToCart($event)"></app-product-list>
+
+  <app-cart #cart></app-cart>
+</div>

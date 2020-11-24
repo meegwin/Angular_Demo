@@ -7,7 +7,8 @@ import { HomeModule } from './home/home.module';
 import { Baitap2Module } from './baitap2/baitap2.module';
 import { DataBindingModule } from './data-binding/data-binding.module';
 import { DirectivesModule } from './directives/directives.module';
-
+import { MovieModule } from './movie/movie.module';
+import { ShoppingModule } from './shopping/shopping.module';
 // NgModule: meta-data
 @NgModule({
   // declarations: Nơi khai báo các component được module quản lý
@@ -28,6 +29,8 @@ import { DirectivesModule } from './directives/directives.module';
     Baitap2Module,
     DataBindingModule,
     DirectivesModule,
+    MovieModule,
+    ShoppingModule,
   ],
   // Nơi khai báo các services
   providers: [],

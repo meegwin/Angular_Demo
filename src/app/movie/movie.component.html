@@ -1,0 +1,7 @@
+<div class="container">
+  <h1 class="text-center">Bài tập Movie</h1>
+  <app-add-movie (onAdd)="handleAddMovie($event)"></app-add-movie>
+  <br />
+  <!-- Đặt cho component app-movie-list 1 referance để có thể sử dụng ViewChild -->
+  <app-movie-list #movieList [movieAdded]="movieAdded"></app-movie-list>
+</div>
