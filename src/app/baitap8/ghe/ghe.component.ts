@@ -7,9 +7,28 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GheComponent implements OnInit {
   @Input() seat: any
+  // Quản lý trạng thái của ghế
+  isSelect: boolean = false
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  handleSelect() {
+    this.isSelect = !this.isSelect
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

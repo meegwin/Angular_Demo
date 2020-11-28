@@ -1,3 +1,12 @@
-<button class="seat btn btn-dark">
+<button
+  class="seat btn"
+  [class]="{
+    'btn-dark': !seat.booked && !isSelect,
+    'btn-danger': seat.booked,
+    'btn-success': isSelect
+  }"
+  [disabled]="seat.booked"
+  (click)="handleSelect()"
+>
   {{ seat.name }}
 </button>
