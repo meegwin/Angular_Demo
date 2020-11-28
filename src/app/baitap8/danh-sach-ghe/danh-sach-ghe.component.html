@@ -1,0 +1,7 @@
+<div class="w-100 bg-secondary">Tài xế</div>
+
+<div class="row">
+  <div *ngFor="let seat of seatList" class="col-sm-3">
+    <app-ghe [seat]="seat"></app-ghe>
+  </div>
+</div>
