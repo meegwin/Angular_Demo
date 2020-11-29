@@ -2,6 +2,6 @@
 
 <div class="row">
   <div *ngFor="let seat of seatList" class="col-sm-3">
-    <app-ghe [seat]="seat"></app-ghe>
+    <app-ghe #seat [seat]="seat" (onSelect)="handleSelect($event)"></app-ghe>
   </div>
 </div>

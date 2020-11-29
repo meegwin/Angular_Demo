@@ -1,11 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChildren,
+  QueryList
+} from '@angular/core';
+import { GheComponent } from '../ghe/ghe.component';
 @Component({
   selector: 'app-danh-sach-ghe',
   templateUrl: './danh-sach-ghe.component.html',
-  styleUrls: ['./danh-sach-ghe.component.scss']
+  styleUrls: ['./danh-sach-ghe.component.scss'],
 })
 export class DanhSachGheComponent implements OnInit {
+  @ViewChildren('seat') seatComponents: QueryList<GheComponent>
+  @Output() onSelect = new EventEmitter();
   seatList: any[] = [
     { id: 1, name: 'số 1', price: 100, booked: false },
     { id: 2, name: 'số 2', price: 100, booked: false },
@@ -43,9 +52,30 @@ export class DanhSachGheComponent implements OnInit {
     { id: 34, name: 'số 34', price: 100, booked: false },
     { id: 35, name: 'số 35', price: 100, booked: false },
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  handleSelect(seat: any) {
+    this.onSelect.emit(seat);
   }
 
+  handleRemove(seatId: number) {
+    this.seatComponents.forEach((item: GheComponent) => {
+      // Duyệt qua từng ghế, kiểm tra id của ghế trùng với seatId cần remove thì sẽ set isSelect lại thành false
+      if(item.seat.id === seatId) {
+        item.isSelect = false
+      }
+    })
+  }
 }
+
+
+
+
+
+
+
+
+
+

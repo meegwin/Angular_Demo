@@ -3,10 +3,16 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <app-danh-sach-ghe></app-danh-sach-ghe>
+      <app-danh-sach-ghe
+        #danhSachGhe
+        (onSelect)="handleSelect($event)"
+      ></app-danh-sach-ghe>
     </div>
     <div class="col-sm-6">
-      <app-danh-sach-dang-chon></app-danh-sach-dang-chon>
+      <app-danh-sach-dang-chon
+        #danhSachDangChon
+        (onRemove)="handleRemove($event)"
+      ></app-danh-sach-dang-chon>
     </div>
   </div>
 </div>

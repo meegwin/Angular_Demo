@@ -1,1 +1,6 @@
-<p>danh-sach-dang-chon works!</p>
+<h3>Danh sách ghế đã đặt ({{selectedList.length}})</h3>
+
+<p *ngFor="let item of selectedList">
+  Ghế: {{item.name}} - {{item.price}}
+  <a class="text-danger" (click)="handleRemove(item)">[Huỷ]</a>
+</p>
