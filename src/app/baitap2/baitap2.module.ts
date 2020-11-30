@@ -19,7 +19,7 @@ import { ItemComponent } from './item/item.component';
     ItemComponent,
   ],
   imports: [CommonModule],
-  exports: [Baitap2Component],
+  // exports: [Baitap2Component],
 })
 export class Baitap2Module {}
 

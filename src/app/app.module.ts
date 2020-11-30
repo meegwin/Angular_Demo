@@ -5,13 +5,13 @@ import { DemoComponent } from './demo/demo.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
-// import { HomeModule } from './home/home.module';
 import { Baitap2Module } from './baitap2/baitap2.module';
+import { Baitap8Module } from './baitap8/baitap8.module';
+// import { HomeModule } from './home/home.module';
 // import { DataBindingModule } from './data-binding/data-binding.module';
 // import { DirectivesModule } from './directives/directives.module';
-// import { MovieModule } from './movie/movie.module';
-// import { ShoppingModule } from './shopping/shopping.module';
-import { Baitap8Module } from './baitap8/baitap8.module';
+import { MovieModule } from './movie/movie.module';
+import { ShoppingModule } from './shopping/shopping.module';
 
 import { PipeModule } from './shared/pipe/pipe.module';
 import { ComponentsModule } from './shared/components/components.module';
@@ -36,13 +36,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ComponentsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    // HomeModule,
     Baitap2Module,
+    Baitap8Module,
+    // HomeModule,
     // DataBindingModule,
     // DirectivesModule,
-    // MovieModule,
-    // ShoppingModule,
-    Baitap8Module,
+    MovieModule,
+    ShoppingModule,
   ],
   // Nơi khai báo các services
   providers: [],
