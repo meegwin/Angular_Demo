@@ -16,42 +16,20 @@ export class HomeComponent implements OnInit {
   // Chạy 1 lần sau khi render
   // Thích hợp để: call API, tương tác với DOM, event
   ngOnInit(): void {
-    // this.movieList = this.movieService.getMovieList()
-    // console.log(this.movieList)
-
-    // this.movieService
-    //   .getMovieListPromise()
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    this.movieService.getMovieListObservable().subscribe({
+    this.movieService.getMovieList().subscribe({
       // next: Nhận kết quả
       next: (result) => {
-        console.log(result)
+        console.log(result);
+        this.movieList = result;
       },
       // error: Nhận lỗi
       error: (error) => {
-        console.log(error)
+        console.log(error);
       },
       // complete: kết thúc observalbe
       complete: () => {
-        console.log('DONE')
-      }
-    })
+        console.log('DONE');
+      },
+    });
   }
 }
-
-
-
-
-
-
-
-
-
-
-

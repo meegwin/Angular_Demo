@@ -1,1 +1,25 @@
-<p>movie works!</p>
+<!-- Loading -->
+<div *ngIf="loading">
+  <!-- TODO: <app-loading></app-loading> -->
+  <p class="text-center">Loading...</p>
+</div>
+
+<!-- Error -->
+<div *ngIf="error">
+  <!-- TODO: <app-error> -->
+  <p class="text-center">{{ error }}</p>
+</div>
+
+<!-- Result -->
+<div *ngIf="movieDetail" class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <img [src]="movieDetail.hinhAnh" with="300" height="300" />
+    </div>
+    <div class="col-sm-6">
+      <h1>{{ movieDetail.tenPhim }}</h1>
+      <p>{{ movieDetail.ngayKhoiChieu | date: "dd/MM/yyyy" }}</p>
+      <p>{{ movieDetail.moTa }}</p>
+    </div>
+  </div>
+</div>

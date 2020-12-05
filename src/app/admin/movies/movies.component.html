@@ -1,1 +1,26 @@
-<p>movies works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Mã phim</th>
+      <th>Tên phim</th>
+      <th>Ngày khởi chiếu</th>
+      <th>Hình ảnh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of movieList">
+      <td>{{ movie.maPhim }}</td>
+      <td>{{ movie.tenPhim }}</td>
+      <td>{{ movie.ngayKhoiChieu }}</td>
+      <td>
+        <img [src]="movie.hinhAnh" width="40" height="40" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (onSelect)="handleChangePage($event)"
+></app-pagination>

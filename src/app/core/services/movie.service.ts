@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../models/movie';
 import { Observable } from 'rxjs';
 
@@ -7,61 +8,91 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MovieService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getMovieList(): Movie[] {
-    return [
-      {
-        id: 1,
-        name: 'One punch man',
-        price: 80000,
-        image: 'assets/images/one-punch-man.jpeg',
-      },
-      {
-        id: 2,
-        name: 'Iron man',
-        price: 80000,
-        image: 'assets/images/iron-man.jpeg',
-      },
-      {
-        id: 3,
-        name: 'Wonder woman',
-        price: 80000,
-        image: 'assets/images/wonder-woman.jpeg',
-      },
-    ];
+  getMovieList(): Observable<Movie[]> {
+    const url =
+      'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01';
+
+    return this.http.get<Movie[]>(url);
   }
 
-  getMovieListPromise() {
-    return new Promise((resolve, reject) => {
-      // Fake api
-      setTimeout(() => {
-        // Trả ra kết quả trong .then
-        resolve(['iron-man', 'wonder-woman']);
+  getMovieDetail(movieId: string): Observable<any> {
+    const url = `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim`;
 
-        // Trả ra lỗi trong .catch
-        // reject('Wrong!!!!!!!')
-      }, 2000);
-    });
+    let params = new HttpParams();
+    params = movieId ? params.append('maPhim', movieId) : params;
+
+    return this.http.get(url, { params });
   }
 
-  getMovieListObservable() {
-    return new Observable((subscribe) => {
-      // Fake API
-      setTimeout(() => {
-        // Truyền kết quả
-        subscribe.next(['iron-man', 'wonder-woman']);
+  // currentPage: số page
+  // pageSize: số phần tử trên 1 page
+  getMovieListPaging(currentPage: number, pageSize: number): Observable<any> {
+    const url =
+      'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang';
 
-        // Truyền lỗi
-        // subscribe.error('Wrong!!!!!!!')
+    let params = new HttpParams();
+    params = currentPage
+      ? params.append('soTrang', currentPage.toString())
+      : params;
+    params = pageSize
+      ? params.append('soPhanTuTrenTrang', pageSize.toString())
+      : params;
+    params = params.append('maNhom', 'GP01');
 
-        // Kết thúc Observable
-        subscribe.complete()
-      }, 2000);
-    });
+    return this.http.get(url, { params });
   }
+
+  // getMovieList(): Movie[] {
+  //   return [
+  //     {
+  //       id: 1,
+  //       name: 'One punch man',
+  //       price: 80000,
+  //       image: 'assets/images/one-punch-man.jpeg',
+  //     },
+  //     {
+  //       id: 2,
+  //       name: 'Iron man',
+  //       price: 80000,
+  //       image: 'assets/images/iron-man.jpeg',
+  //     },
+  //     {
+  //       id: 3,
+  //       name: 'Wonder woman',
+  //       price: 80000,
+  //       image: 'assets/images/wonder-woman.jpeg',
+  //     },
+  //   ];
+  // }
+
+  // getMovieListPromise() {
+  //   return new Promise((resolve, reject) => {
+  //     // Fake api
+  //     setTimeout(() => {
+  //       // Trả ra kết quả trong .then
+  //       resolve(['iron-man', 'wonder-woman']);
+
+  //       // Trả ra lỗi trong .catch
+  //       // reject('Wrong!!!!!!!')
+  //     }, 2000);
+  //   });
+  // }
+
+  // getMovieListObservable() {
+  //   return new Observable((subscribe) => {
+  //     // Fake API
+  //     setTimeout(() => {
+  //       // Truyền kết quả
+  //       subscribe.next(['iron-man', 'wonder-woman']);
+
+  //       // Truyền lỗi
+  //       // subscribe.error('Wrong!!!!!!!')
+
+  //       // Kết thúc Observable
+  //       subscribe.complete()
+  //     }, 2000);
+  //   });
+  // }
 }
-
-
-
-
