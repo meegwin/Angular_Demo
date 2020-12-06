@@ -6,12 +6,36 @@
       <form #signinForm="ngForm" (ngSubmit)="handleSignin()">
         <div class="form-group">
           <label>Tài khoản</label>
+          <!-- ngModel: Lấy value của input -->
+          <!-- #taiKhoan="ngModel": lấy ra trạng thái của ô input -->
+          <!-- touched - untouched, pristine - dirty, invalid - valid -->
           <input
             type="text"
             name="taiKhoan"
             class="form-control"
             ngModel
+            #taiKhoan="ngModel"
+            required
+            minlength="3"
+            maxlength="20"
           />
+          <app-error-message
+            name="taiKhoan"
+            [validator]="taiKhoan"
+          ></app-error-message>
+          <!-- <div
+            *ngIf="taiKhoan.invalid && (taiKhoan.dirty || taiKhoan.touched)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="taiKhoan.errors.required">
+              Tài khoản không được để trống
+            </span>
+            <span
+              *ngIf="taiKhoan.errors.minlength || taiKhoan.errors.maxlength"
+            >
+              Tài khoản phải từ 3 đến 20 ký tự
+            </span>
+          </div> -->
         </div>
         <div class="form-group">
           <label>Mật khẩu</label>
@@ -20,9 +44,30 @@
             name="matKhau"
             class="form-control"
             ngModel
+            #matKhau="ngModel"
+            required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
           />
+          <app-error-message
+            name="matKhau"
+            [validator]="matKhau"
+          ></app-error-message>
+          <!-- <div
+            *ngIf="matKhau.invalid && (matKhau.dirty || matKhau.touched)"
+            class="alert alert-danger"
+          >
+            <span *ngIf="matKhau.errors.required">
+              Mật khẩu không được để trống
+            </span>
+            <span *ngIf="matKhau.errors.pattern">
+              Mật khẩu ít nhất 1 ký tự hoa, 1 ký tự thường, 1 số và phải từ 8 ký
+              tự trở lên
+            </span>
+          </div> -->
         </div>
-        <button class="btn btn-success">Đăng Nhập</button>
+        <button class="btn btn-success" [disabled]="signinForm.invalid">
+          Đăng Nhập
+        </button>
       </form>
     </div>
   </div>

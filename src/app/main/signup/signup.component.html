@@ -1,1 +1,62 @@
-<p>signup works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <h1 class="text-center">Signup</h1>
+      <form [formGroup]="signupForm" (ngSubmit)="handleSignup()">
+        <div class="form-group">
+          <label>Tài khoản</label>
+          <input type="text" class="form-control" formControlName="taiKhoan" />
+          <app-error-message
+            name="taiKhoan"
+            [validator]="signupForm.get('taiKhoan')"
+          ></app-error-message>
+          <!-- <div
+            *ngIf="
+              signupForm.get('taiKhoan').invalid &&
+              (signupForm.get('taiKhoan').touched ||
+                signupForm.get('taiKhoan').dirty)
+            "
+            class="alert alert-danger"
+          >
+            <span *ngIf="signupForm.get('taiKhoan').errors.required">
+              Tài khoản không được để trống
+            </span>
+          </div> -->
+        </div>
+        <div class="form-group">
+          <label>Mật khẩu</label>
+          <input type="text" class="form-control" formControlName="matKhau" />
+          <app-error-message
+            name="matKhau"
+            [validator]="signupForm.get('matKhau')"
+          ></app-error-message>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" formControlName="email" />
+          <app-error-message
+            name="email"
+            [validator]="signupForm.get('email')"
+          ></app-error-message>
+        </div>
+        <div class="form-group">
+          <label>Họ tên</label>
+          <input type="text" class="form-control" formControlName="hoTen" />
+          <app-error-message
+            name="hoTen"
+            [validator]="signupForm.get('hoTen')"
+          ></app-error-message>
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="text" class="form-control" formControlName="soDt" />
+          <app-error-message
+            name="soDt"
+            [validator]="signupForm.get('soDt')"
+          ></app-error-message>
+        </div>
+        <button class="btn btn-success">Đăng ký</button>
+      </form>
+    </div>
+  </div>
+</div>

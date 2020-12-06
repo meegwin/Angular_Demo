@@ -1,0 +1,14 @@
+<div
+  *ngIf="validator.invalid && (validator.touched || validator.dirty)"
+  class="alert alert-danger"
+>
+  <!-- Duyệt qua object errors dùng pipe keyvalue -->
+  <ng-container *ngFor="let item of validator.errors | keyvalue">
+    <!-- item.key: required/minlength/maxlength,pattern/email,... -->
+    <!-- item.value: true/false -->
+    <span *ngIf="item.value">
+      <!-- name: taiKhoan, item.key: required -->
+      {{ messages[name][item.key] }}
+    </span>
+  </ng-container>
+</div>

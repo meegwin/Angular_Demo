@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 
 import { MainRoutingModule } from './main-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +20,12 @@ import { SignupComponent } from './signup/signup.component';
     SigninComponent,
     SignupComponent,
   ],
-  imports: [CommonModule, MainRoutingModule, FormsModule],
+  imports: [
+    CommonModule,
+    MainRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ComponentsModule,
+  ],
 })
 export class MainModule {}
