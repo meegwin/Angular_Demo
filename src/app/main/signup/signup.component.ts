@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  submitted: boolean = false;
 
   constructor(private auth: AuthenService, private router: Router) {
     // taiKhoan, matKhau, email, hoTen, soDt
@@ -36,16 +37,13 @@ export class SignupComponent implements OnInit {
     this.signupForm.markAllAsTouched();
     if (this.signupForm.invalid) return;
     console.log(this.signupForm.value);
+
     this.auth.signup(this.signupForm.value).subscribe({
       // Nếu đăng ký thành công, chuyển sang page signin
       complete: () => {
+        this.submitted = true;
         this.router.navigate(['/signin']);
       },
     });
   }
 }
-
-
-
-
-

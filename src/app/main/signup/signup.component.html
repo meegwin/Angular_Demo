@@ -25,7 +25,11 @@
         </div>
         <div class="form-group">
           <label>Mật khẩu</label>
-          <input type="text" class="form-control" formControlName="matKhau" />
+          <input
+            type="password"
+            class="form-control"
+            formControlName="matKhau"
+          />
           <app-error-message
             name="matKhau"
             [validator]="signupForm.get('matKhau')"

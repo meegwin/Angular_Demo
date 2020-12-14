@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AuthenInterceptor } from './core/interceptors/authen.interceptor';
 import { AppComponent } from './app.component';
 import { PipeModule } from './shared/pipe/pipe.module';
 import { ComponentsModule } from './shared/components/components.module';
@@ -30,7 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
   ],
   // Nơi khai báo các services
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenInterceptor, multi: true },
+  ],
   // Khai báo AppComponent là component khởi chạy đầu tiên
   bootstrap: [AppComponent],
 })

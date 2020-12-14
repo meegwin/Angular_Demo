@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../models/movie';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+
+import { ApiService } from './api.service';
 
 @Injectable({
   // Từ phiên bản angular 6, không cần import services vào AppModule và gắn vào trong providers, vì providedIn: 'root' đã giúp angular import dùm
   providedIn: 'root',
 })
 export class MovieService {
-  constructor(private http: HttpClient) {}
+  movieList = new BehaviorSubject([]);
+
+  constructor(private http: ApiService) {}
 
   getMovieList(): Observable<Movie[]> {
-    const url =
-      'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01';
+    const url = 'QuanLyPhim/LayDanhSachPhim?maNhom=GP01';
 
     return this.http.get<Movie[]>(url);
   }
 
   getMovieDetail(movieId: string): Observable<any> {
-    const url = `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim`;
+    const url = `QuanLyPhim/LayThongTinPhim`;
 
     let params = new HttpParams();
     params = movieId ? params.append('maPhim', movieId) : params;
@@ -29,8 +32,7 @@ export class MovieService {
   // currentPage: số page
   // pageSize: số phần tử trên 1 page
   getMovieListPaging(currentPage: number, pageSize: number): Observable<any> {
-    const url =
-      'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang';
+    const url = 'QuanLyPhim/LayDanhSachPhimPhanTrang';
 
     let params = new HttpParams();
     params = currentPage

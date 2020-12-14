@@ -20,8 +20,12 @@ export class SigninComponent implements OnInit {
     console.log(this.signinForm.value);
     this.auth.signin(this.signinForm.value).subscribe({
       next: (result) => {
+        // Đăng nhập thành công
         console.log(result);
-
+        // Lưu thông tin user xuống localstorage
+        localStorage.setItem('user', JSON.stringify(result));
+        // Set lại giá trị của biến userInfo trong AuthenService
+        this.auth.userInfo.next(result);
         this.router.navigate(['/']);
       },
     });

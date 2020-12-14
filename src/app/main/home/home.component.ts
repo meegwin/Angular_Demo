@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
       // next: Nhận kết quả
       next: (result) => {
         console.log(result);
-        this.movieList = result;
+        // this.movieList = result;
+        this.movieService.movieList.next(result);
       },
       // error: Nhận lỗi
       error: (error) => {
@@ -29,6 +30,12 @@ export class HomeComponent implements OnInit {
       // complete: kết thúc observalbe
       complete: () => {
         console.log('DONE');
+      },
+    });
+
+    this.movieService.movieList.asObservable().subscribe({
+      next: (result) => {
+        this.movieList = result;
       },
     });
   }

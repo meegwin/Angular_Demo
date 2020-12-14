@@ -8,6 +8,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
+import { SignupGuard } from '../core/guards/signup.guard';
+
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
 
@@ -18,7 +20,11 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'movie/:movieId', component: MovieComponent },
       { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent },
+      {
+        path: 'signup',
+        canDeactivate: [SignupGuard],
+        component: SignupComponent,
+      },
     ],
   },
 ];
